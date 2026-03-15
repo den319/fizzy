@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FC } from "react";
 import { asText, Content } from "@prismicio/client";
@@ -28,7 +28,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero: FC<HeroProps> = ({ slice }) => {
-const ready = useStore((state) => state.ready);
+  const ready = useStore((state) => state.ready);
   const isDesktop = useMediaQuery("(min-width: 768px)", true);
 
   useGSAP(
@@ -155,7 +155,7 @@ const ready = useStore((state) => state.ready);
         </div>
       </div>
     </Bounded>
-  )
+  );
 };
 
 export default Hero;

@@ -28,8 +28,7 @@ type PickContentRelationshipFieldData<
       TSubRelationship["customtypes"],
       TLang
     >;
-  } & // Group
-  {
+  } & { // Group
     [TGroup in Extract<
       TRelationship["fields"][number],
       | prismic.CustomTypeModelFetchGroupLevel1
@@ -41,8 +40,7 @@ type PickContentRelationshipFieldData<
           PickContentRelationshipFieldData<TGroup, TGroupData, TLang>
         >
       : never;
-  } & // Other fields
-  {
+  } & { // Other fields
     [TFieldKey in Extract<
       TRelationship["fields"][number],
       string
@@ -70,6 +68,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type PageDocumentDataSlicesSlice =
+  | BigTextSlice
   | AlternatingTextSlice
   | CarouselSlice
   | SkyDiveSlice
@@ -217,6 +216,36 @@ type AlternatingTextSliceVariation = AlternatingTextSliceDefault;
 export type AlternatingTextSlice = prismic.SharedSlice<
   "alternating_text",
   AlternatingTextSliceVariation
+>;
+
+/**
+ * Default variation for BigText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BigTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *BigText*
+ */
+type BigTextSliceVariation = BigTextSliceDefault;
+
+/**
+ * BigText Shared Slice
+ *
+ * - **API ID**: `big_text`
+ * - **Description**: BigText
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BigTextSlice = prismic.SharedSlice<
+  "big_text",
+  BigTextSliceVariation
 >;
 
 /**
@@ -481,6 +510,9 @@ declare module "@prismicio/client" {
       AlternatingTextSliceDefaultPrimary,
       AlternatingTextSliceVariation,
       AlternatingTextSliceDefault,
+      BigTextSlice,
+      BigTextSliceVariation,
+      BigTextSliceDefault,
       CarouselSlice,
       CarouselSliceDefaultPrimary,
       CarouselSliceVariation,

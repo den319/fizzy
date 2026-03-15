@@ -11,9 +11,9 @@ const Loader = dynamic(
   { ssr: false },
 );
 
-type Props = {};
+// type Props = {};
 
-export default function ViewCanvas({}: Props) {
+export default function ViewCanvas() {
   return (
     <>
       <Canvas
@@ -36,7 +36,7 @@ export default function ViewCanvas({}: Props) {
         <Suspense fallback={null}>
           <View.Port />
         </Suspense>
-          {/* <Perf position="top-left" /> */}
+        {/* <Perf position="top-left" /> */}
       </Canvas>
       <Loader />
     </>

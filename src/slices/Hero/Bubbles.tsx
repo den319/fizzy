@@ -10,13 +10,13 @@ import { Direction } from "@/utils/enums";
 const o = new THREE.Object3D();
 
 interface I_Bubble {
-  count: number,
-  speed: number,
-  bubbleSize?: number,
-  opacity?: number,
-  repeat: boolean,
-  direction?: Direction,
-  color?: string,
+  count: number;
+  speed: number;
+  bubbleSize?: number;
+  opacity?: number;
+  repeat: boolean;
+  direction?: Direction;
+  color?: string;
 }
 
 // Customizations in case you want to use this in other scenes.
@@ -26,8 +26,8 @@ export function Bubbles({
   bubbleSize = 0.05,
   opacity = 0.5,
   repeat = true,
-  direction= Direction.UP,
-  color="#ffffff"
+  direction = Direction.UP,
+  color = "#ffffff",
 }: I_Bubble) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
 
@@ -84,15 +84,17 @@ export function Bubbles({
     }
 
     // Assign current body color to bubble so it looks natural
-    material.color = new THREE.Color(color ? color : document.body.style.backgroundColor);
+    material.color = new THREE.Color(
+      color ? color : document.body.style.backgroundColor,
+    );
 
-        // console.log(o.position.y)
+    // console.log(o.position.y)
 
     for (let i = 0; i < count; i++) {
       meshRef.current.getMatrixAt(i, o.matrix);
       o.position.setFromMatrixPosition(o.matrix);
       // Move bubble upwards by its speed
-      if(direction === Direction.UP) {
+      if (direction === Direction.UP) {
         o.position.y += bubbleSpeed.current[i];
         // Reset bubble position if it moves off the top of the screen
         if (o.position.y > 4 && repeat) {
@@ -100,7 +102,7 @@ export function Bubbles({
           o.position.x = gsap.utils.random(-4, 4);
           o.position.z = gsap.utils.random(0, 8);
         }
-      } else if(direction === Direction.DOWN) {
+      } else if (direction === Direction.DOWN) {
         o.position.y -= bubbleSpeed.current[i];
         // Reset bubble position if it moves off the down of the screen
         if (o.position.y < -4 && repeat) {
@@ -109,7 +111,6 @@ export function Bubbles({
           o.position.z = gsap.utils.random(0, 8);
         }
       }
-
 
       o.updateMatrix();
       meshRef.current.setMatrixAt(i, o.matrix);

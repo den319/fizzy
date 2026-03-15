@@ -1,7 +1,11 @@
-"use client"
+"use client";
 import { FC, useRef, useState } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, PrismicText, SliceComponentProps } from "@prismicio/react";
+import {
+  PrismicRichText,
+  PrismicText,
+  SliceComponentProps,
+} from "@prismicio/react";
 import { SodaCanProps } from "@/components/SodaCan";
 import clsx from "clsx";
 import { ArrowIcon } from "./ArrowIcon";
